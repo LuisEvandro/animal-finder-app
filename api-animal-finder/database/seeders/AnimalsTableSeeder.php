@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Animals;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class AnimalsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-		$this->call('AnimalTableSeeder');
-		$this->call('AnimalOwnerTableSeeder');
+		Animals::factory()
+				->count(1)
+				->create();
     }
 }

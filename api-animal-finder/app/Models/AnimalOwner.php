@@ -9,9 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+class AnimalOwner extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable, HasFactory;
+
+	protected $table = 'animal_owner';
+	protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +22,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+		'id',
+        'name',
+		'email',
+		'phone',
+		'password',
+		'guid',
+		'created_at',
+		'updated_at'
     ];
 
     /**
@@ -28,6 +38,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password','id'
     ];
 }

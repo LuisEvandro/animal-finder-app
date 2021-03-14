@@ -13,6 +13,20 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->get('/', function (){
+    return response()->json('Unauthorized.', 401);
+});
+
+$router->group(['prefix' => env('API_VERSION', 'api/v1')], function ($router){
+    //Rotas de dono de animal
+	$router->group(['prefix' => 'animalOwner'], function ($router) {
+        $router->post('create[/{guid}]', 'AnimalOwnerController@CreateAnimalOwner');
+        $router->get('{guid}', 'AnimalOwnerController@ShowAnimalOwner');
+		$router->post('list', 'AnimalOwnerController@ListAnimalOwner');
+        $router->delete('delete/{guid}', 'AnimalOwnerController@DeleteAnimalOwner');
+    });
+	//Rotas de animals
+	$router->group(['prefix' => 'animal'], function ($router) {
+		$router->post('create[/{guid}]', 'AnimalsController@CreateAnimal');
+	});
 });
