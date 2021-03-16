@@ -37,4 +37,8 @@ $router->group(['prefix' => env('API_VERSION', 'api/v1')], function ($router){
 		$router->post('login', 'LoginController@Login');
 		$router->post('animalOwner/create', 'LoginController@CreateAnimalOwner');
 	});
+	//Rotas de animals
+	$router->group(['prefix' => 'notification', 'middleware' => 'auth'], function ($router) {
+		$router->post('{guid}', 'NotificationController@ListNotifications');
+	});
 });

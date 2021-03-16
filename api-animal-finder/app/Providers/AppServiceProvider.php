@@ -19,6 +19,11 @@ use App\Interfaces\AnimalsInterface;
 
 use App\Repositories\AnimalsRepository;
 
+//Notification
+use App\Interfaces\NotificationInterface;
+
+use App\Repositories\NotificationRepository;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -33,5 +38,7 @@ class AppServiceProvider extends ServiceProvider
 		$this->app->bind(AnimalsInterface::class, AnimalsRepository::class);
 
 		$this->app->bind(AuthenticationInterface::class, AuthenticationRepository::class);
+
+		$this->app->bind(NotificationInterface::class, NotificationRepository::class);
     }
 }

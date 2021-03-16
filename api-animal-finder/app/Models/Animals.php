@@ -48,11 +48,13 @@ class Animals extends Model implements AuthenticatableContract, AuthorizableCont
 		'animal_owner_id'
     ];
 
-    /**
-     * Get the pet that owns the owner.
-     */
     public function owner() 
     {
         return $this->hasOne('App\Models\AnimalOwner', 'id', 'animal_owner_id');
+    }
+
+	public function notification()
+    {
+        return $this->hasOne('App\Models\Notification', 'id', 'id');
     }
 }
