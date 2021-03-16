@@ -40,7 +40,7 @@ class AnimalOwnerRepository implements AnimalOwnerInterface
      */
     public function FindAnimalOwner($guid)
     {
-		$Owner = AnimalOwner::where('guid', '=', $guid)->first();
+		$Owner = AnimalOwner::where('guid', '=', $guid)->with('animals')->first();
 
         return $Owner;
     }
@@ -58,7 +58,8 @@ class AnimalOwnerRepository implements AnimalOwnerInterface
     public function ListAnimalOwner($page, $size, $search, $orderBy)
     {
 		$data = AnimalOwner::where('name', 'LIKE', "%{$search}%")
-							->orWhere('email', 'LIKE', "%{$search}%");
+							->orWhere('email', 'LIKE', "%{$search}%")
+							->with('animals');
 
 		$count = $data->count();
         $items = $data->skip(($page - 1) * $size)->take($size)->orderBy('id', $orderBy)->get();

@@ -19,14 +19,22 @@ $router->get('/', function (){
 
 $router->group(['prefix' => env('API_VERSION', 'api/v1')], function ($router){
     //Rotas de dono de animal
-	$router->group(['prefix' => 'animalOwner'], function ($router) {
+	$router->group(['prefix' => 'animalOwner', 'middleware' => 'auth'], function ($router) {
         $router->post('create[/{guid}]', 'AnimalOwnerController@CreateAnimalOwner');
         $router->get('{guid}', 'AnimalOwnerController@ShowAnimalOwner');
 		$router->post('list', 'AnimalOwnerController@ListAnimalOwner');
         $router->delete('delete/{guid}', 'AnimalOwnerController@DeleteAnimalOwner');
     });
 	//Rotas de animals
-	$router->group(['prefix' => 'animal'], function ($router) {
-		$router->post('create[/{guid}]', 'AnimalsController@CreateAnimal');
+	$router->group(['prefix' => 'animal', 'middleware' => 'auth'], function ($router) {
+		$router->post('create[/{guid}]', 'AnimalsController@CreateOrUpdateAnimal');
+		$router->get('{guid}', 'AnimalsController@ShowAnimal');
+		$router->post('list', 'AnimalsController@ListAnimals');
+		$router->delete('delete/{guid}', 'AnimalsController@DeleteAnimal');
+	});
+	//Login
+	$router->group(['prefix' => 'auth'], function ($router) {
+		$router->post('login', 'LoginController@Login');
+		$router->post('animalOwner/create', 'LoginController@CreateAnimalOwner');
 	});
 });

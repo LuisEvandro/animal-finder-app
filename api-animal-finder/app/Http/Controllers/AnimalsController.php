@@ -29,8 +29,51 @@ class AnimalsController extends Controller
      * 
      * @return JsonResponse
      */
-    public function CreateAnimal($guid = null, Request $request)
+    public function CreateOrUpdateAnimal($guid = null, Request $request)
     {
-        return $this->service->CreateAnimal($guid, $request);
+        return $this->service->CreateOrUpdateAnimal($guid, $request);
+    }
+
+	/**
+     * Método que retorna os dados de um dono de animal de acordo com o "guid" passado no param
+     * @method GET
+     * 
+     * @param String $guid --> "guid" do dono de animal que deve ser retornado.
+     * @param Request $request JSON que conterá todos os dados do dono de animal.
+     * 
+     * @return JsonResponse
+     */
+    public function ShowAnimal($guid = null)
+    {
+        return $this->service->ShowAnimal($guid);
+    }
+
+	/**
+     * Método que retorna lista de dados de animais de acordo com os param de busca
+     * @method POST
+     * $page, $size, $search, $orderBy
+     * @param Number $page --> Número da pagina.
+	 * @param Number $size --> Quantidade de dados no retorno da pagina.
+	 * @param String $search --> Texto de procura dentro dos campos nome, email.
+	 * @param String $orderBy --> Formato da ordenação da lista.
+     * 
+     * @return JsonResponse
+     */
+    public function ListAnimals(Request $request)
+    {
+        return $this->service->ListAnimals($request->page, $request->size, $request->search, $request->orderBy);
+    }
+
+	/**
+     * Método que deleta os dados de um animal de acordo com o "guid" passado no param
+     * @method DELETE
+     * 
+     * @param String $guid --> "guid" do animal que deve ser deletado.
+     * 
+     * @return JsonResponse
+     */
+	public function DeleteAnimal($guid = null)
+    {
+        return $this->service->DeleteAnimal($guid);
     }
 }

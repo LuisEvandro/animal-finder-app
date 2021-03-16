@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
+use App\Models\AnimalOwner;
+
 class Animals extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable, HasFactory;
@@ -36,10 +38,21 @@ class Animals extends Model implements AuthenticatableContract, AuthorizableCont
 		'animal_owner_id'
     ];
 
+	/**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+		'id',
+		'animal_owner_id'
+    ];
+
     /**
      * Get the pet that owns the owner.
      */
-    public function owner() {
-        return $this->belongsTo(AnimalOwner::class, 'animal_owner_id');
+    public function owner() 
+    {
+        return $this->hasOne('App\Models\AnimalOwner', 'id', 'animal_owner_id');
     }
 }

@@ -17,7 +17,7 @@ class CreateAnimalTable extends Migration
             $table->bigIncrements('id')->autoIncrement();
 			$table->string('name', 100);
 			$table->string('age', 3);
-			$table->string('photo', 150);
+			$table->string('photo', 150)->nullable();
 			$table->string('description',500);
 			$table->string('cityMissing', 100);
 			$table->string('stateMissing',100);

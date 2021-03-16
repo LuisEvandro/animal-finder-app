@@ -4,6 +4,11 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+//Auth login
+use App\Interfaces\AuthenticationInterface;
+
+use App\Repositories\AuthenticationRepository;
+
 //Animal Owner
 use App\Interfaces\AnimalOwnerInterface;
 
@@ -26,5 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AnimalOwnerInterface::class, AnimalOwnerRepository::class);
 
 		$this->app->bind(AnimalsInterface::class, AnimalsRepository::class);
+
+		$this->app->bind(AuthenticationInterface::class, AuthenticationRepository::class);
     }
 }

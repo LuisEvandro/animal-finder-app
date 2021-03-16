@@ -40,4 +40,14 @@ class AnimalOwner extends Model implements AuthenticatableContract, Authorizable
     protected $hidden = [
         'password','id'
     ];
+
+	public function animals() 
+    {
+        return $this->hasMany('App\Models\Animals', 'animal_owner_id', 'id');
+    }
+
+	public function tokens() 
+    {
+        return $this->hasMany('App\Models\Token', 'id', 'id');
+    }
 }

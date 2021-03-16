@@ -34,7 +34,7 @@ class AnimalsFactory extends Factory
 			'guid' => $this->faker->uuid(),
 			'created_at' => $this->faker->dateTime(),
 			'updated_at' => $this->faker->dateTime(),
-			'animal_owner_id' => 1
+			'animal_owner_id' => AnimalOwner::factory()
         ];
     }
 }

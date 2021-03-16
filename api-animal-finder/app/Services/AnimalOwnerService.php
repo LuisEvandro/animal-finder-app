@@ -109,6 +109,9 @@ class AnimalOwnerService
 
 			$Owners = $this->interface->ListAnimalOwner($page, $size, $search, $orderBy);
 
+			if(!$Owners)
+				$error = "Problema ao realizar a busca !";
+
             return response()->json($this->helpers->generateReponse(Response::HTTP_OK, "OK", $Owners, $error), Response::HTTP_OK);
         } catch (\Exception $ex) {
             $exception = [
