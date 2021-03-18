@@ -28,17 +28,24 @@ $router->group(['prefix' => env('API_VERSION', 'api/v1')], function ($router){
 	//Rotas de animals
 	$router->group(['prefix' => 'animal', 'middleware' => 'auth'], function ($router) {
 		$router->post('create[/{guid}]', 'AnimalsController@CreateOrUpdateAnimal');
-		$router->get('{guid}', 'AnimalsController@ShowAnimal');
-		$router->post('list', 'AnimalsController@ListAnimals');
 		$router->delete('delete/{guid}', 'AnimalsController@DeleteAnimal');
+	});
+	//Rotas de animals aberta
+	$router->group(['prefix' => 'animals',], function ($router) {
+		$router->post('list', 'AnimalsController@ListAnimals');
+		$router->get('{guid}', 'AnimalsController@ShowAnimal');
 	});
 	//Login
 	$router->group(['prefix' => 'auth'], function ($router) {
 		$router->post('login', 'LoginController@Login');
 		$router->post('animalOwner/create', 'LoginController@CreateAnimalOwner');
 	});
-	//Rotas de animals
+	//Rotas de notificações
 	$router->group(['prefix' => 'notification', 'middleware' => 'auth'], function ($router) {
 		$router->post('{guid}', 'NotificationController@ListNotifications');
+	});
+	//Rotas de notificações aberta
+	$router->group(['prefix' => 'notifications'], function ($router) {
+		$router->post('create', 'NotificationController@CreateNotification');
 	});
 });

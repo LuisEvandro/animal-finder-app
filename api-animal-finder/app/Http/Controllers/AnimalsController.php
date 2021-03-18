@@ -56,12 +56,13 @@ class AnimalsController extends Controller
 	 * @param Number $size --> Quantidade de dados no retorno da pagina.
 	 * @param String $search --> Texto de procura dentro dos campos nome, email.
 	 * @param String $orderBy --> Formato da ordenação da lista.
+	 * @param String $status --> Quando ouver filtra o retorno
      * 
      * @return JsonResponse
      */
     public function ListAnimals(Request $request)
     {
-        return $this->service->ListAnimals($request->page, $request->size, $request->search, $request->orderBy);
+        return $this->service->ListAnimals($request->page, $request->size, $request->search, $request->orderBy, $request->status);
     }
 
 	/**

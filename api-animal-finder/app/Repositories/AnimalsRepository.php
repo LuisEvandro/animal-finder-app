@@ -56,13 +56,14 @@ class AnimalsRepository implements AnimalsInterface
      * 
      * @return Array
      */
-    public function ListAnimals($page, $size, $search, $orderBy)
+    public function ListAnimals($page, $size, $search, $orderBy, $status)
 	{
-		$data = Animals::where('name', 'LIKE', "%{$search}%")
-						->orWhere('cityMissing', 'LIKE', "%{$search}%")
-						->orWhere('stateMissing', 'LIKE', "%{$search}%")
-						->orWhere('status', 'LIKE', "%{$search}%")
-						->with('owner');
+		$data = Animals::where('status', 'LIKE', "%{$status}%")
+						->where(function ($query) use ($search) {
+							$query->where('name', 'LIKE', "%{$search}%")
+								->orWhere('cityMissing', 'LIKE', "%{$search}%")
+								->orWhere('stateMissing', 'LIKE', "%{$search}%");
+						})->with('owner');
 
 		$count = $data->count();
         $items = $data->skip(($page - 1) * $size)->take($size)->orderBy('id', $orderBy)->get();

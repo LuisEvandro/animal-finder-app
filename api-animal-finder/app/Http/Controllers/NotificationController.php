@@ -20,4 +20,9 @@ class NotificationController extends Controller
     {
         return $this->service->ListNotifications($guid, $request);
     }
+
+	public function CreateNotification(Request $request)
+    {
+        return $this->service->CreateNotification($request);
+    }
 }

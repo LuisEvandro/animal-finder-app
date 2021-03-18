@@ -8,7 +8,7 @@ interface AnimalsInterface
 
 	public function FindAnimal($guid);
 
-	public function ListAnimals($page, $size, $search, $orderBy);
+	public function ListAnimals($page, $size, $search, $orderBy, $status);
 
 	public function DeleteAnimal($guid);
 

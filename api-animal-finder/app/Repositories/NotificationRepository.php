@@ -46,4 +46,32 @@ class NotificationRepository implements NotificationInterface
 		return $items;
     }
 
+	/**
+     * Cadastra a notificação
+     * 
+     * @param request Array com dados da notificação
+     * 
+     * @return Array
+     */
+    public function CreateNotification($request)
+    {
+		$NotificationData = new Notification;
+
+		$Animal = Animals::where('guid', '=', $request->animalGuid)->first();
+
+		if($Animal != null){
+
+			$NotificationData->name = $request->name;
+			$NotificationData->phone = $request->phone;
+			$NotificationData->description = $request->description;
+			$NotificationData->animal_id = $Animal->id;
+
+			$NotificationData->save();
+
+			return $NotificationData;
+		}else{
+			return false;
+		}
+    }
+
 }

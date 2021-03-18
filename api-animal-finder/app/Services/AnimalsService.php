@@ -117,13 +117,13 @@ class AnimalsService
         }
     }
 
-	public function ListAnimals($page, $size, $search, $orderBy)
+	public function ListAnimals($page, $size, $search, $orderBy, $status)
     {
         try {
 			$error = null;
             $date = new DateTime();
 
-            $Animals = $this->interface->ListAnimals($page, $size, $search, $orderBy);
+            $Animals = $this->interface->ListAnimals($page, $size, $search, $orderBy, $status);
 
             return response()->json($this->helpers->generateReponse(Response::HTTP_OK, "OK", $Animals, $error), Response::HTTP_OK);
         } catch (\Exception $ex) {
