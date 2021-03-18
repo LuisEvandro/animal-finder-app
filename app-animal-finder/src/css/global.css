@@ -1,0 +1,27 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+}
+
+:root{
+    --white: #fff;
+	--color-logo-1: #1498D5;
+	--color-logo-2: #000000;
+    --text: #666666;
+    --title: #2e384d;
+    --red: #e83f5b;
+    --green: #4cd63b;
+	--background: rgb(243, 243, 243);
+}
+
+.MuiPagination-ul{
+	place-content: center;
+}
+
+.MuiCircularProgress-colorSecondary{
+	color: var(--red) !important;
+}
+
+.MuiAppBar-colorPrimary, .MuiPaper-root{
+	background-color: var(--background) !important;
+}
