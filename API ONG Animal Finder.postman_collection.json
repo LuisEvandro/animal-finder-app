@@ -1,0 +1,446 @@
+{
+	"info": {
+		"_postman_id": "ef7ee819-c75b-410d-af84-aed4cdf55eb8",
+		"name": "API ONG Animal Finder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Dono do animal",
+			"item": [
+				{
+					"name": "Criar/editar dono do animal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Luis Evandro\",\r\n    \"email\": \"luisx@mailinator.com\",\r\n    \"phone\": \"(14) 12345-4321\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/animalOwner/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"animalOwner",
+								"create"
+							]
+						},
+						"description": "para editar basta passar o guid \"api/v1/animalOwner/create/{guid}\""
+					},
+					"response": []
+				},
+				{
+					"name": "Pegar dono do animal",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "9a26504c-6d79-451b-8830-1c0c06ebca7c",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8001/api/v1/animalOwner/CA443910-29CC-EC49-1464-C0A28F5CF5A5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"v1",
+								"animalOwner",
+								"CA443910-29CC-EC49-1464-C0A28F5CF5A5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista de donos do animal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "8A31110D-BD04-BFCB-C23D-CBF709909C9B",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 1,\r\n    \"size\": 10,\r\n    \"search\": \"\",\r\n    \"orderBy\": \"desc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/animalOwner/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"animalOwner",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar dono do animal",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/animalOwner/delete/A6810BE1-63F8-184E-A976-CC7F45E28C01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"animalOwner",
+								"delete",
+								"A6810BE1-63F8-184E-A976-CC7F45E28C01"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Animais",
+			"item": [
+				{
+					"name": "Criar/editar animal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "9a26504c-6d79-451b-8830-1c0c06ebca7c",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Doguinho 1 EDITADO\",\r\n    \"age\": 5,\r\n    \"photo\": \"http://lorempixel.com/800/600/animals/\",\r\n    \"description\": \"Um cachorro muito lindo EDITADO!\",\r\n    \"cityMissing\": \"Marilia\",\r\n    \"stateMissing\": \"São Paulo\",\r\n    \"status\": \"encontrado\",\r\n    \"guidOwner\": \"22153aa4-91fe-3043-9356-4d317d81096b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/api/v1/animal/create/733FF8FC-DDAB-41E4-DF20-5B28D1C96CF9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"v1",
+								"animal",
+								"create",
+								"733FF8FC-DDAB-41E4-DF20-5B28D1C96CF9"
+							]
+						},
+						"description": "para editar basta passar o guid \"api/v1/animal/create/{guid}\""
+					},
+					"response": []
+				},
+				{
+					"name": "Show Animal",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "8261F154-4956-2D49-F66E-C7587A5A8853",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8001/api/v1/animals/21a9b748-edc4-33df-b44a-46a04768c2f1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"21a9b748-edc4-33df-b44a-46a04768c2f1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Animals",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "8261F154-4956-2D49-F66E-C7587A5A8853",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 1,\r\n    \"size\": 10,\r\n    \"search\": \"\",\r\n    \"orderBy\": \"desc\",\r\n    \"status\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/api/v1/animals/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar dono do animal",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "8261F154-4956-2D49-F66E-C7587A5A8853",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8001/api/v1/animal/delete/d590dbe7-5c44-3d0f-a37a-94557e920a4f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"v1",
+								"animal",
+								"delete",
+								"d590dbe7-5c44-3d0f-a37a-94557e920a4f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"igraham@example.net\",\r\n    \"pass\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar/editar dono do animal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Luis Evandro\",\r\n    \"email\": \"luisx@mailinator.com\",\r\n    \"phone\": \"(14) 12345-4321\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/api/v1/auth/animalOwner/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"animalOwner",
+								"create"
+							]
+						},
+						"description": "para editar basta passar o guid \"api/v1/animalOwner/create/{guid}\""
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "List Notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "9a26504c-6d79-451b-8830-1c0c06ebca7c"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 1,\r\n    \"size\": 1000,\r\n    \"orderBy\": \"desc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/api/v1/notification/21a9b748-edc4-33df-b44a-46a04768c2f1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"v1",
+								"notification",
+								"21a9b748-edc4-33df-b44a-46a04768c2f1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "9a26504c-6d79-451b-8830-1c0c06ebca7c"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Nova notification\",\r\n    \"phone\": \"14 9964-1244\",\r\n    \"description\": \"Achei na rua de teste, esta comigo no teste 2\",\r\n    \"animalGuid\": \"98d85ca7-250d-333d-a42d-950545f6fae5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/api/v1/notifications/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"v1",
+								"notifications",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

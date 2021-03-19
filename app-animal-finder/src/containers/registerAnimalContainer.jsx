@@ -51,7 +51,6 @@ export default function RegisterAnimal() {
 	const [ description, setDescription ] = useState('');
 	const [ cityMissing, setCityMissing ] = useState('');
 	const [ stateMissing, setStateMissing ] = useState('');
-	const [ photo, setPhoto ] = useState('http://lorempixel.com/800/600/animals/');
 	const [ user, setUser ] = useState([]);
 
 	const [ errors, setErrors ] = useState({
@@ -96,7 +95,7 @@ export default function RegisterAnimal() {
 		}else if(event.target.name === 'age'){
 			setAge(event.target.value);
 		}else if(event.target.name === 'photo'){
-			setPhoto('http://lorempixel.com/800/600/animals/');
+
 		}else if(event.target.name === 'description'){
 			setDescription(event.target.value);
 			if((event.target.value).length === 0){

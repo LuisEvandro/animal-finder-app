@@ -8,7 +8,6 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { useSnackbar } from 'notistack';
 import { getUserData } from "../services/auth";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -47,8 +46,6 @@ export default function BackofficeAnimal() {
 	const [ data, setData ] = useState([]);
 	const [ animals, setAnimals ] = useState([]);
 	
-	const { enqueueSnackbar } = useSnackbar();
-
 	let history = useHistory();
 
 	const goBack = () => {
