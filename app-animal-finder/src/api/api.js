@@ -6,7 +6,7 @@ export const API = {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": window.localStorage.getItem('token')
+            "Authorization": window.localStorage.getItem('Token')
         }
     }).then(response => {
         if(response.ok)
@@ -33,7 +33,7 @@ export const API = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": window.localStorage.getItem('token')
+            "Authorization": window.localStorage.getItem('Token')
         },
         body: body && JSON.stringify(body)
     }).then(response => {
@@ -60,7 +60,7 @@ export const API = {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": window.localStorage.getItem('token')
+            "Authorization": window.localStorage.getItem('Token')
         },        
         body: JSON.stringify(body)
     }).then(response => {

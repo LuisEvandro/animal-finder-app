@@ -12,7 +12,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSnackbar } from 'notistack';
-import { setToken, setUserData } from "../services/auth";
+import InputMask from 'react-input-mask';
 
 const useStyles = makeStyles(() =>
 	createStyles({
@@ -24,7 +24,7 @@ const useStyles = makeStyles(() =>
 			width: '100%',
 			marginBottom: 25,
 		},
-		headerLogin: {
+		headerRegister: {
 			textAlign: 'center',
 			fontSize: '2rem',
 			fontWeight: 'bold',
@@ -36,7 +36,8 @@ const useStyles = makeStyles(() =>
 		},
 		registerButton:{
 			width: '100%',
-			marginTop: 25
+			marginTop: 25,
+			marginBottom: 25
 		},
 		buttonProgress:{
 			textAlign: 'center',
@@ -45,14 +46,18 @@ const useStyles = makeStyles(() =>
 	})
 );
 
-export default function Login() {
+export default function Register() {
 	const [ showPassword, setShowPassword ] = useState(false);
 	const [ loading, setLoading ] = useState(false);
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
+	const [ phone, setPhone ] = useState('');
+	const [ name, setName ] = useState('');
 	const [ errors, setErrors ] = useState({
 		email: false,
-		password: false
+		password: false,
+		phone: false,
+		name: false
 	});
 	const { enqueueSnackbar } = useSnackbar();
 
@@ -62,8 +67,8 @@ export default function Login() {
 		history.goBack();
 	};
 
-	const goCadastro = () => {
-		history.push("/cadastro/dono-animal");
+	const goLogin = () => {
+		history.push("/login");
 	};
 
 	const handleClickShowPassword = () => {
@@ -76,12 +81,16 @@ export default function Login() {
 			if(validateEmail(event.target.value)){
 				setErrors({
 					email: false,
-					password: errors.password
+					password: errors.password,
+					phone: errors.phone,
+					name: errors.name,
 				});
 			}else{
 				setErrors({
 					email: true,
-					password: errors.password
+					password: errors.password,
+					phone: errors.phone,
+					name: errors.name,
 				});
 			}
 		}else if(event.target.name === 'password'){
@@ -89,12 +98,50 @@ export default function Login() {
 			if((event.target.value).length < 6){
 				setErrors({
 					email: errors.email,
-					password: true
+					password: true,
+					phone: errors.phone,
+					name: errors.name,
 				});
 			}else{
 				setErrors({
 					email: errors.email,
-					password: false
+					password: false,
+					phone: errors.phone,
+					name: errors.name,
+				});
+			}
+		}else if(event.target.name === 'phone'){
+			setPhone(event.target.value);
+			if((event.target.value).length === 15){
+				setErrors({
+					email: errors.email,
+					password: errors.password,
+					phone: false,
+					name: errors.name,
+				});
+			}else{
+				setErrors({
+					email: errors.email,
+					password: errors.password,
+					phone: true,
+					name: errors.name,
+				});
+			}
+		}else if(event.target.name === 'name'){
+			setName(event.target.value);
+			if((event.target.value).length === 0){
+				setErrors({
+					email: errors.email,
+					password: errors.password,
+					phone: errors.phone,
+					name: true,
+				});
+			}else{
+				setErrors({
+					email: errors.email,
+					password: errors.password,
+					phone: errors.phone,
+					name: false,
 				});
 			}
 		}
@@ -109,29 +156,23 @@ export default function Login() {
 		return (false)
 	}
 
-	const handleEnterKey = (event) => {
-		if(event.key === 'Enter'){
-            login();
-        }
-	};
+	const register = () => {
 
-	const login = () => {
-
-		if(errors.email === false && errors.password === false && email && password.length >= 6){
+		if(errors.email === false && errors.password === false && errors.name === false && errors.phone === false && 
+			email && name && password.length >= 6 && phone.length === 15){
 			setLoading(true);
 
 			let requestData = {
+				name: name,
 				email: email,
-				pass: password
+				phone: phone,
+				password: password
 			};
 
-			API.post('auth/login',requestData).then(response => {
+			API.post('auth/animalOwner/create',requestData).then(response => {
 				if(response.Error == null){
-					let tokenData = response.Data.token;
-					setToken(tokenData.token);
-					setUserData(response.Data);
-					enqueueSnackbar('Login realizado com sucesso !', { variant: 'success' });
-					history.push("/");
+					enqueueSnackbar('Cadastro realizado com sucesso !', { variant: 'success' });
+					history.push("/login");
 				}else{
 					enqueueSnackbar(response.Error , { variant: 'error' });
 					setLoading(false);
@@ -152,8 +193,8 @@ export default function Login() {
 						<ArrowBackIcon fontSize="large" />
 					</IconButton>
 				</Grid>
-				<Grid item xs={12} className={classes.headerLogin}>
-					LOGIN
+				<Grid item xs={12} className={classes.headerRegister}>
+					Cadastro
 				</Grid>
 			</Grid>
 			<Grid
@@ -167,6 +208,21 @@ export default function Login() {
 						noValidate
 					>
 						<TextField
+							id="name-id"
+							name="name"
+							required
+							disabled={loading}
+							type="text"
+							className={classes.inputStyle}
+							label="Nome"
+							variant="outlined"
+							onChange={handleChange}
+							value={name}
+							helperText={errors.name && 'Nome invalido !'}
+							error={errors.name}
+							InputProps={{maxLength: 95}}
+						/>
+						<TextField
 							id="email-id"
 							name="email"
 							required
@@ -176,7 +232,6 @@ export default function Login() {
 							label="E-mail"
 							variant="outlined"
 							onChange={handleChange}
-							onKeyPress={(e) => handleEnterKey(e)}
 							value={email}
 							helperText={errors.email && 'E-mail invalido !'}
 							error={errors.email}
@@ -191,7 +246,6 @@ export default function Login() {
 							className={classes.inputStyle}
 							label="Senha"
 							variant="outlined"
-							onKeyPress={(e) => handleEnterKey(e)}
 							onChange={handleChange}
 							value={password}
 							helperText={errors.password && 'Senha deve conter no minimo 6 digitos !'}
@@ -207,6 +261,32 @@ export default function Login() {
 								maxLength: 95
 							}}
 						/>
+						<InputMask
+							mask="(99) 99999-9999"
+							id="phone-id"
+							name="phone"
+							required
+							value={phone}
+							disabled={loading}
+							maskChar=""
+							onChange={handleChange}
+						>
+							{() => <TextField
+								id="phone-id"
+								name="phone"
+								required
+								disabled={loading}
+								type="text"
+								className={classes.inputStyle}
+								label="Telefone"
+								variant="outlined"
+								onChange={handleChange}
+								value={phone}
+								helperText={errors.phone && 'Telefone invalido !'}
+								error={errors.phone}
+								InputProps={{ maxLength: 95 }}
+							/>}
+						</InputMask>
 						
 						{loading ? (
 							<div style={{textAlign: 'center'}}>
@@ -214,11 +294,11 @@ export default function Login() {
 							</div>
 						) : (
 							<>
-								<Button type="button" size="large" variant="contained" disabled={loading} onClick={login} className={classes.loginButton}>
-									Login
+								<Button type="button" size="large" variant="contained" disabled={loading} onClick={register} className={classes.registerButton}>
+									Finalizar
 								</Button>
-								<Button type="button" size="large" variant="contained" disabled={loading} onClick={goCadastro} className={classes.registerButton}>
-									Cadastrar-se
+								<Button type="button" size="large" variant="contained" disabled={loading} onClick={goLogin} className={classes.loginButton}>
+									Ir para login
 								</Button>
 							</>
 						)}

@@ -17,6 +17,8 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import PetsIcon from '@material-ui/icons/Pets';
 import { Link } from "react-router-dom";
 import { logout, isAuthenticated, getUserData } from "../services/auth";
 
@@ -58,17 +60,33 @@ const useStyles = makeStyles({
 
 export default function Header() {
 	const [open, setOpen] = useState(false);
-	const [user, setUser] = useState('');
+	const [user, setUser] = useState([]);
 
-	const headerItems = [
+	useEffect(() => {
+		if(isAuthenticated()){
+			let user = getUserData();
+			setUser(user);
+		}
+	}, []);
+
+	const headerItemsAuthTrue = [
 		{ "Nome": "Início", "Link": "/", "Chave": "HomeKey", "Icone": "HomeIcon" },
-		{ "Nome": "Login ", "Link": "/Login", "Chave": "CharactersKey", "Icone": "AccountBoxIcon" },
+		{ "Nome": "Meus animais", "Link": `/backoffice/animal`, "Chave": "BackOfficeAnimal", "Icone": "PetsIcon" },
+		{ "Nome": "Registrar animal", "Link": "/cadastro/animal", "Chave": "RegisterAnimalKey", "Icone": "PetsIcon" },
+	];
+
+	const headerItemsAuthFalse = [
+		{ "Nome": "Início", "Link": "/", "Chave": "HomeKey", "Icone": "HomeIcon" },
+		{ "Nome": "Login ", "Link": "/login", "Chave": "LoginKey", "Icone": "AccountBoxIcon" },
+		{ "Nome": "Registre-se", "Link": "/cadastro/dono-animal", "Chave": "RegisterKey", "Icone": "PersonAddIcon" },
 	];
 
 	const IconSelected = (Icon) => {
 		switch(Icon.IconName){
 			case 'HomeIcon': return <HomeIcon/>;
 			case 'AccountBoxIcon': return <AccountBoxIcon/>;
+			case 'PersonAddIcon': return <PersonAddIcon/>;
+			case 'PetsIcon': return <PetsIcon/>;
 			default: return <BrokenImageIcon/>
 		}
 	};
@@ -88,14 +106,6 @@ export default function Header() {
 	const logoutButton = () => {
 		logout();
 	};
-
-	useEffect(() => {
-		if(isAuthenticated()){
-			let user = getUserData();
-			console.log(user);
-			setUser(user);
-		}
-	}, []);
 
 	const classes = useStyles();
 
@@ -130,21 +140,37 @@ export default function Header() {
 					<Divider />
 				</div>
 				<List>
-					{headerItems.map((item,index) => (
-						<div key={index}>
-							<ListItemLink href={item.Link} button key={item.Chave}>
-								<ListItemIcon><IconSelected IconName={item.Icone} /></ListItemIcon>
-								<ListItemText primary={item.Nome} />
+					{isAuthenticated() ? (
+						headerItemsAuthTrue.map((item,index) => (
+							<div key={index}>
+								<ListItemLink href={item.Link} button key={item.Chave}>
+									<ListItemIcon><IconSelected IconName={item.Icone} /></ListItemIcon>
+									<ListItemText primary={item.Nome} />
+								</ListItemLink>
+								<Divider className={classes.dividerList} />
+							</div>
+						))
+					) : (
+						headerItemsAuthFalse.map((item,index) => (
+							<div key={index}>
+								<ListItemLink href={item.Link} button key={item.Chave}>
+									<ListItemIcon><IconSelected IconName={item.Icone} /></ListItemIcon>
+									<ListItemText primary={item.Nome} />
+								</ListItemLink>
+								<Divider className={classes.dividerList} />
+							</div>
+						))
+					)}
+					
+					{isAuthenticated() && (
+						<>
+							<ListItemLink href={'/'} onClick={logoutButton} button key={'sair-01'}>
+								<ListItemIcon><ExitToAppIcon /></ListItemIcon>
+								<ListItemText primary={'Sair'} />
 							</ListItemLink>
 							<Divider className={classes.dividerList} />
-						</div>
-					))}
-					
-					<ListItemLink href={'/'} onClick={logoutButton} button key={'sair-01'}>
-						<ListItemIcon><ExitToAppIcon /></ListItemIcon>
-						<ListItemText primary={'Sair'} />
-					</ListItemLink>
-					<Divider className={classes.dividerList} />
+						</>
+					)}
 
 				</List>
 			</Drawer>

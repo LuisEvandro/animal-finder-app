@@ -52,6 +52,7 @@ export default function AnimalsList() {
 	const [ animals , setAnimals ] = useState([]);
 	const [ stringSearch , setStringSearch ] = useState("");
 	const [ stringClickSearch , setStringClickSearch ] = useState("");
+	const [ loading , setLoading ] = useState(true);
 
 	const [page, setPage] = useState(1);
 	const handleChangePage = (event, value) => {
@@ -63,14 +64,15 @@ export default function AnimalsList() {
 	};
 
 	const clickSearch = () => {
+		setPage(1);
 		setStringClickSearch(stringSearch);
 	};
 
 	useEffect(() => {
-		
+		setLoading(true);
 		let requestData = {
 			page: page,
-			size: 15,
+			size: 9,
 			search: stringSearch,
 			orderBy: "desc",
 			status: "perdido"
@@ -78,10 +80,12 @@ export default function AnimalsList() {
 
 		API.post('animals/list',requestData).then(response => {
 			if(response.Error == null){
-				setData(response);
+				setData(response.Data);
 				setAnimals(response.Data.Registros);
+				setLoading(false);
 			}else{
 				setData(response);
+				setLoading(false);
 			}
 		});
 
@@ -114,56 +118,57 @@ export default function AnimalsList() {
 				</Grid>
 			</Grid>
 			<Grid container spacing={3}>
-				{animals.length > 0 ?
-						<>
-							<Grid item xs={12} className={classes.marginPagination}>
-								<Pagination color="standard" count={data.TotalPaginas} page={page} onChange={handleChangePage} />
-							</Grid>
-							{animals.map((animalItem,index) => {
-								return 	(
-									<Grid item xs={12} sm={6} md={4} key={animalItem.guid} >
-										<Card key={animalItem.guid+index}  item={animalItem} hideButtonFound={false} /> 
-									</Grid>
-								)
-							})}
-							<Grid item xs={12} className={classes.marginPagination} >
-								<Pagination color="standard" count={data.TotalPaginas} page={page} onChange={handleChangePage} />
-							</Grid>
-						</>
-					:
-						<>
+				{(animals.length > 0 && !loading) &&
+					<>
+						<Grid item xs={12} className={classes.marginPagination}>
+							<Pagination color="standard" count={data.TotalPaginas} page={page} onChange={handleChangePage} />
+						</Grid>
+						{animals.map((animalItem,index) => {
+							return 	(
+								<Grid item xs={12} sm={6} md={4} key={animalItem.guid} >
+									<Card key={animalItem.guid+index}  item={animalItem} hideButtonFound={false} /> 
+								</Grid>
+							)
+						})}
+						<Grid item xs={12} className={classes.marginPagination} >
+							<Pagination color="standard" count={data.TotalPaginas} page={page} onChange={handleChangePage} />
+						</Grid>
+					</>
+				}
+					<>
+						{(data.Contagem === 0 && !loading) &&
 							<Grid item xs={12} className={classes.styleBoxTextEmpty}>
-								{data.Contagem === 0 ? 
-									<Typography variant="h6" className={classes.styleTextEmpty} gutterBottom>
-										Sem Resultados
-									</Typography>
-									:
+								<Typography variant="h6" className={classes.styleTextEmpty} gutterBottom>
+									Sem Resultados
+								</Typography>
+							</Grid>
+						}
+						{loading &&
+							<>
+								<Grid item xs={12} className={classes.styleBoxTextEmpty}>
 									<Typography variant="h6" className={classes.styleTextEmpty} gutterBottom>
 										Carregando ...
 									</Typography>
-								}
-							</Grid>
-							{data.Contagem !== 0 &&
-								<>
-									<Grid item xs={12} sm={6} md={4} className={classes.styleLoader}>
-										<Skeleton variant="rect" height={200} animation="wave" />
-										<Skeleton variant="text" animation="wave" width="100%" />
-										<Skeleton variant="text" animation="wave" width="85%" />
-									</Grid>
-									<Grid item xs={12} sm={6} md={4} className={classes.styleLoader}>
-										<Skeleton variant="rect" height={200} animation="wave" />
-										<Skeleton variant="text" animation="wave" width="100%" />
-										<Skeleton variant="text" animation="wave" width="85%" />
-									</Grid>
-									<Grid item xs={12} sm={6} md={4} className={classes.styleLoader}>
-										<Skeleton variant="rect" height={200} animation="wave" />
-										<Skeleton variant="text" animation="wave" width="100%" />
-										<Skeleton variant="text" animation="wave" width="85%" />
-									</Grid>
-								</>
-							}
-						</>
-				}
+								</Grid>
+								<Grid item xs={12} sm={6} md={4} className={classes.styleLoader}>
+									<Skeleton variant="rect" height={200} animation="wave" />
+									<Skeleton variant="text" animation="wave" width="100%" />
+									<Skeleton variant="text" animation="wave" width="85%" />
+								</Grid>
+								<Grid item xs={12} sm={6} md={4} className={classes.styleLoader}>
+									<Skeleton variant="rect" height={200} animation="wave" />
+									<Skeleton variant="text" animation="wave" width="100%" />
+									<Skeleton variant="text" animation="wave" width="85%" />
+								</Grid>
+								<Grid item xs={12} sm={6} md={4} className={classes.styleLoader}>
+									<Skeleton variant="rect" height={200} animation="wave" />
+									<Skeleton variant="text" animation="wave" width="100%" />
+									<Skeleton variant="text" animation="wave" width="85%" />
+								</Grid>
+							</>
+						}
+					</>
+
 				{data.Error != null &&
 					<Grid item xs={12} className={classes.styleBoxTextEmpty}>
 						<Typography variant="h6" className={classes.styleTextEmpty} gutterBottom>

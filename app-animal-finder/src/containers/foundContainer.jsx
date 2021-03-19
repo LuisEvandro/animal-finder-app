@@ -94,7 +94,7 @@ export default function Found() {
 		//console.log(event.target.name+' - '+event.target.value);
 		if(event.target.name === 'phone'){
 			setPhone(event.target.value);
-			if((event.target.value).length == 15){
+			if((event.target.value).length === 15){
 				setErrors({
 					phone: false,
 					name: errors.name,
@@ -162,7 +162,7 @@ export default function Found() {
 				}
 			});
 		}else{
-
+			enqueueSnackbar('Preencha os campos corretamente !' , { variant: 'error' });
 		}
 	};
 

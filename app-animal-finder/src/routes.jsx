@@ -10,6 +10,10 @@ import Home from "./pages/Home";
 import Page404 from "./pages/404";
 import Login from "./pages/Login";
 import Found from "./pages/Found";
+import RegisterAnimalOwner from "./pages/RegisterAnimalOwner";
+import BackofficeAnimal from "./pages/BackofficeAnimal";
+import AnimalNotification from "./pages/AnimalNotification";
+import RegisterAnimal from "./pages/RegisterAnimal";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -46,7 +50,12 @@ export default function MainRoutes(){
 				<Route path="/" exact component={Home} />
 				<Route path="/encontrei/:animalGuid" exact component={Found} />
 
+				<LoginRoute path="/cadastro/dono-animal" exact component={RegisterAnimalOwner} />
 				<LoginRoute path="/login" exact component={Login} />
+
+				<PrivateRoute path="/backoffice/animal" exact component={BackofficeAnimal} />
+				<PrivateRoute path="/backoffice/animal/:animalGuid" exact component={AnimalNotification} />
+				<PrivateRoute path="/cadastro/animal" exact component={RegisterAnimal} />
 				
 				<Route component={Page404} />
 			</Switch>
