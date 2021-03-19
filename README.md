@@ -44,20 +44,21 @@ Basta utilizar acessar a página aberta pelo APP ou acessar http://localhost:300
 
 
 
-## Imagens PREVIEW (19-03-2021)
-# 
+## PREVIEW DE ALGUMAS TELAS (19-03-2021)
+
+### Home
 ![Alt text](/imgsApp/home-animal-finder.png "Home")
-
+### Encontrei
 ![Alt text](/imgsApp/Tela-Encontrei.png "Encontrei")
-
+### Home Deslogado
 ![Alt text](/imgsApp/Menu-Header-Sem-Login.png "Home Deslogado")
-
+### Home Logado
 ![Alt text](/imgsApp/Menu-Header-Com-Login.png "Home Logado")
-
+### Login
 ![Alt text](/imgsApp/Login.png "Login")
-
+### Cadastro dono do animal
 ![Alt text](/imgsApp/Cadastro.png "Cadastro dono do animal")
-
+### Backoffice lista de animais do usúario
 ![Alt text](/imgsApp/BackOffice-Animais.png "Backoffice lista de animais do usúario")
-
+### Notificações do animal selecionado na img acima
 ![Alt text](/imgsApp/BackOffice-Notificacoes-Animais.png "Notificações do animal selecionado na img acima")
