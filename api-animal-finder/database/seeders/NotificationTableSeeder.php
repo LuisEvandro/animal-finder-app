@@ -15,7 +15,7 @@ class NotificationTableSeeder extends Seeder
     public function run()
     {
 		Notification::factory()
-					->count(1)
+					->count(50)
 					->create();
     }
 }
