@@ -44,11 +44,19 @@ Basta utilizar acessar a página aberta pelo APP ou acessar http://localhost:300
 
 
 ## Imagens PREVIEW (19-03-2021)
-
-# Dashboard
-![Alt text]( "Dashboard")
-Basta utilizar acessar a página aberta pelo frontend ou acessar http://localhost:3000/<br>
-
 # 
 ![Alt text](/imgsApp/home-animal-finder.png "Home")
 
+![Alt text](/imgsApp/Tela-Encontrei.png "Encontrei")
+
+![Alt text](/imgsApp/Menu-Header-Sem-Login.png "Home Deslogado")
+
+![Alt text](/imgsApp/Menu-Header-Com-Login.png "Home Logado")
+
+![Alt text](/imgsApp/Login.png "Login")
+
+![Alt text](/imgsApp/Cadastro.png "Cadastro dono do animal")
+
+![Alt text](/imgsApp/BackOffice-Animais.png "Backoffice lista de animais do usúario")
+
+![Alt text](/imgsApp/BackOffice-Notificacoes-Animais.png "Notificações do animal selecionado na img acima")
