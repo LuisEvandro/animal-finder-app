@@ -1,6 +1,7 @@
-# Pet Finder
+# ONG Animal Finder
+## Especializada em ajudar a encontrar animais perdidos, para isso solicitou a criação de um sistema web para cadastro dos animais nessa situação.
 
-## COLLE
+## COLLECTION
 -> Na raiz do projeto o arquivo ('API ONG Animal Finder.postman_collection.json') é o JSON para realizar import no postman(https://www.postman.com/downloads/).<br>
 Para poder validar end-point da API com mais facilidade.
 
